@@ -8,7 +8,7 @@ jobs:
   run-check:
     runs-on: ubuntu-latest
     outputs:
-      should_run: $${{ steps.set-output.outputs.should_run }}
+      should_run: ${{ steps.set-output.outputs.should_run }}
     steps:
       - name: Write commit SHA
         run: |
