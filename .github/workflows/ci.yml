@@ -7,6 +7,8 @@ on:
 jobs:
   run-check:
     runs-on: ubuntu-latest
+    outputs:
+      should_run: $${{ steps.set-output.outputs.should_run }}
     steps:
       - name: Write commit SHA
         run: |
@@ -23,6 +25,15 @@ jobs:
           key: commit-sha-${{ github.sha }}
 
       - name: Set job output
+        id: set-output
         run: |
           echo "Check for cache hit"
           echo "Cache hit? - ${{ steps.cache.outputs.cache-hit }}"
+          echo "should_run='true'" >> $GITHUB_OUTPUT
+          
+  test:
+    runs-on: ubuntu-latest
+    needs: run-check
+    if: needs.run-check.outputs.should_run == 'true'
+    steps:
+      - uses: actions/checkout@v3
