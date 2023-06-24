@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "Check for cache hit"
           echo "Cache hit? - ${{ steps.cache.outputs.cache-hit }}"
-          echo "should_run='true'" >> $GITHUB_OUTPUT
+          echo "should_run=true" >> $GITHUB_OUTPUT
           
   test:
     runs-on: ubuntu-latest
