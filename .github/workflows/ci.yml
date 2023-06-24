@@ -40,5 +40,5 @@ jobs:
       
       - name: Check 'should_run'
         run: |
-          echo "Check 'should_run'
+          echo "Check 'should_run'"
           echo "${{ needs.run-check.outputs.should_run }}"
