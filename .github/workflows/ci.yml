@@ -34,6 +34,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: run-check
-    if: needs.run-check.outputs.should_run == 'true'
+#     if: needs.run-check.outputs.should_run == 'true'
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Check 'should_run'
+        run: |
+          echo "Check 'should_run'
+          echo "${{ needs.run-check.outputs.should_run }}"
