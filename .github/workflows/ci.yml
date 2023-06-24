@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: commit-sha
-          key: commit-sha-{{ github.sha }}
+          key: commit-sha-${{ github.sha }}
 
       - name: Set job output
         run: |
