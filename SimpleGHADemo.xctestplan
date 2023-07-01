@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "1DB8CFE9-968C-4B6D-B4A3-0EC05B1754F6",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SimpleGHADemo.xcodeproj",
+      "identifier" : "A43A5F702A3FD21E00400F89",
+      "name" : "SimpleGHADemo"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SimpleGHADemo.xcodeproj",
+        "identifier" : "A43A5F862A3FD21F00400F89",
+        "name" : "SimpleGHADemoTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SimpleGHADemo.xcodeproj",
+        "identifier" : "A43A5F902A3FD21F00400F89",
+        "name" : "SimpleGHADemoUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

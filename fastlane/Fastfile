@@ -1,0 +1,38 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+before_all do |lane, options|
+  # Make sure fastlane is being executing using 'bundle exec' prefix
+  ensure_bundle_exec()
+end
+
+platform :ios do
+  desc "Run tests"
+  lane :test do
+    scan(
+      device: "iPhone X",
+      force_quit_simulator: true,
+      reset_simulator: true,
+      prelaunch_simulator: true,
+      reinstall_app: true,
+      app_identifier: "com.tylermilner.SimpleGHADemo",
+      clean: true,
+      include_simulator_logs: true,
+      disable_concurrent_testing: true
+  )
+  end
+end
