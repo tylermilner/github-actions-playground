@@ -29,7 +29,7 @@ try {
         return;
     }
     if (debug) {
-        console.log(`Debug mode is enabled. Inputs: github_token=****, workflow_id=${workflowId}, branch=${branch}`);
+        console.log(`Debug mode is enabled. Inputs: github_token=***, workflow_id=${workflowId}, branch=${branch}`);
     }
 
     const octokit = github.getOctokit(token);
