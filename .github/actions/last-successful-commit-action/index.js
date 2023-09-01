@@ -9,12 +9,32 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
+    // Get inputs
     const token = core.getInput("github_token");
+    const workflowId = core.getInput("workflow_id");
+    const branch = core.getInput("branch");    
+    const debug = core.getInput("debug") === 'true'; // Convert input to boolean
+
+    // Validate inputs
+    if (!token) {
+        core.setFailed("Input 'github_token' is required.");
+        return;
+    }
+    if (!workflowId) {
+        core.setFailed("Input 'workflow_id' is required.");
+        return;
+    }
+    if (!branch) {
+        core.setFailed("Input 'branch' is required.");
+        return;
+    }
+    if (debug) {
+        console.log(`Debug mode is enabled. Inputs: github_token=****, workflow_id=${workflowId}, branch=${branch}`);
+    }
+
     const octokit = github.getOctokit(token);
     const owner = process.env.GITHUB_REPOSITORY.split("/")[0];
     const repo = process.env.GITHUB_REPOSITORY.split("/")[1];
-    const workflowId = core.getInput("workflow_id");
-    const branch = core.getInput("branch");
 
     octokit.rest.actions.listWorkflowRuns({
         owner: owner,
@@ -25,13 +45,19 @@ try {
     })
     .then(res => {
         const workflowRuns = res.data.workflow_runs;
+        if (debug) {
+            console.log("workflowRuns:", JSON.stringify(workflowRuns, null, 2));
+        }
 
         if (workflowRuns.length < 1) {
-            core.setFailed("No workflow runs found");
+            core.setFailed("No workflow runs found. Make sure the workflow has completed successfully at least once.");
             return;
         }
 
         const headCommits = workflowRuns.map(run => { return run.head_commit });
+        if (debug) {
+            console.log("headCommits:", JSON.stringify(headCommits, null, 2));
+        }
 
         const sortedHeadCommits = headCommits.sort((a, b) => {
             const dateA = new Date(a.timestamp);
@@ -40,8 +66,14 @@ try {
             if (dateA > dateB) return 1;
             return 0;
         });
+        if (debug) {
+            console.log("sortedHeadCommits:", JSON.stringify(sortedHeadCommits, null, 2));
+        }
 
         const lastSuccessCommitHash = sortedHeadCommits[sortedHeadCommits.length - 1].id;
+        if (debug) {
+            console.log("lastSuccessCommitHash:", JSON.stringify(lastSuccessCommitHash, null, 2));
+        }
 
         core.setOutput("commit_hash", lastSuccessCommitHash);
     });
