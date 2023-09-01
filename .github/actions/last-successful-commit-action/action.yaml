@@ -10,6 +10,9 @@ inputs:
   branch:
     description: 'The branch to use for determining the last successful run'
     required: true
+  debug:
+    description: 'Whether or not the action should log debug information'
+    required: false
 outputs:
   commit_hash:
     description: 'The commit hash for the last successful workflow run'
