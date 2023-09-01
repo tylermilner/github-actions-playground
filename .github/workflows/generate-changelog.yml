@@ -1,0 +1,34 @@
+name: Generate Changelog
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get last successful commit
+        id: last-successful-commit
+        uses: ./.github/actions/last-successful-commit-action
+        with:
+          github_token: ${{ github.token }}
+          workflow_id: generate-changelog.yml
+          branch: develop
+
+      - name: Generate release notes
+        id: generate-release-notes
+        run: |
+          if [[ -z "${{ steps.last-successful-commit.outputs.commit_hash }}" ]]; then
+            echo "Error: Unable to generate release notes. Last successful build commit not available."
+            exit 1
+          fi
+          echo "Generating release notes..."
+          # Generate release notes from commits
+          RELEASE_NOTES=$(git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }})
+          echo "release_notes=$RELEASE_NOTES" >> $GITHUB_OUTPUT
+
+      - name: Output release notes
+        run: echo "${{ steps.generate-release-notes.outputs.release_notes}}"
