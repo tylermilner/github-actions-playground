@@ -18,6 +18,7 @@ jobs:
           github_token: ${{ github.token }}
           workflow_id: generate-changelog.yml
           branch: develop
+          debug: true
 
       - name: Generate release notes
         id: generate-release-notes
