@@ -9818,7 +9818,14 @@ try {
         branch: branch
     })
     .then(res => {
-        const headCommits = res.data.workflow_runs.map(run => { return run.head_commit });
+        const workflowRuns = res.data.workflow_runs;
+
+        if (workflowRuns.length < 1) {
+            core.setFailed("No workflow runs found");
+            return;
+        }
+
+        const headCommits = workflowRuns.map(run => { return run.head_commit });
 
         const sortedHeadCommits = headCommits.sort((a, b) => {
             const dateA = new Date(a.timestamp);
