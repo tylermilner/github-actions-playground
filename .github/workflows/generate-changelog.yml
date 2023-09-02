@@ -30,8 +30,10 @@ jobs:
             exit 1
           fi
           echo "Generating release notes..."
+
           # Generate release notes from commits
-          RELEASE_NOTES=$(git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }})
+          RELEASE_NOTES=$(git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }} | cut -d ' ' -f2-)
+      
           echo "release_notes=$RELEASE_NOTES" >> $GITHUB_OUTPUT
 
       - name: Output release notes
