@@ -37,7 +37,7 @@ jobs:
           echo "Release notes content:"
           echo "$RELEASE_NOTES"
       
-          echo "release_notes=$RELEASE_NOTES" >> $GITHUB_ENV
+          echo "release_notes=$RELEASE_NOTES" >> $GITHUB_OUTPUT
 
       - name: Output release notes
         run: echo "${{ steps.generate-release-notes.outputs.release_notes}}"
