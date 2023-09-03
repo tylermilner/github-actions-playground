@@ -44,7 +44,7 @@ jobs:
           echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
           echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
-      - name: Output release notes
+      - name: Display release notes
         run: |
           echo "Generated release notes:"
           echo "${{ steps.generate-release-notes.outputs.release_notes}}"
