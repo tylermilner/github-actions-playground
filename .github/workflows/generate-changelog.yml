@@ -38,7 +38,7 @@ jobs:
           echo "$RELEASE_NOTES"
       
           delimiter="$(openssl rand -hex 8)"
-          echo release_notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
+          echo "release_notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
           echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
           echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
