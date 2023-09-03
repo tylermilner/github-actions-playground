@@ -33,7 +33,10 @@ jobs:
 
           # Generate release notes from commits
           RELEASE_NOTES=$(git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }} | cut -d ' ' -f2-)
-      
+
+          echo "Generated release notes:"
+          echo "$RELEASE_NOTES"
+
           # Convert multiline string to single line string. See https://trstringer.com/github-actions-multiline-strings/#option-1---string-substitution
           RELEASE_NOTES="${RELEASE_NOTES//'%'/'%25'}"
           RELEASE_NOTES="${RELEASE_NOTES//$'\n'/'%0A'}"
