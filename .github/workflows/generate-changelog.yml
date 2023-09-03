@@ -38,6 +38,7 @@ jobs:
           echo "$RELEASE_NOTES"
 
           # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
+          echo "Saving output..."
           delimiter="$(openssl rand -hex 8)"
           echo "release_notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
           echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
