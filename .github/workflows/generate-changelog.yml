@@ -37,13 +37,11 @@ jobs:
           echo "Generated release notes:"
           echo "$RELEASE_NOTES"
 
-          # Convert multiline string to single line string. See https://trstringer.com/github-actions-multiline-strings/#option-1---string-substitution
-          RELEASE_NOTES="${RELEASE_NOTES//'%'/'%25'}"
-          RELEASE_NOTES="${RELEASE_NOTES//$'\n'/'%0A'}"
-          RELEASE_NOTES="${RELEASE_NOTES//$'\r'/'%0D'}"
-
-          # Save output
-          echo "release_notes=$RELEASE_NOTES" >> "$GITHUB_OUTPUT"
+          # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
+          delimiter="$(openssl rand -hex 8)"
+          echo "release_notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
+          echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
+          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
       - name: Output release notes
         run: |
