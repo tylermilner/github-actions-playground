@@ -6,6 +6,8 @@ on:
 
 jobs:
   generate-changelog:
+    permissions:
+      actions: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
