@@ -48,5 +48,5 @@ jobs:
 
       - name: Display release notes
         run: |
-          echo "Generated release notes:"
+          echo "Release notes:"
           echo "${{ steps.generate-release-notes.outputs.release_notes}}"
