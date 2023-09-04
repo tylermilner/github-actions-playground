@@ -26,34 +26,9 @@ jobs:
 
       - name: Generate release notes
         id: generate-release-notes
-        run: |
-          if [[ -z "${{ steps.last-successful-commit.outputs.commit_hash }}" ]]; then
-            echo "Error: Unable to generate release notes. Last successful build commit not available."
-            exit 1
-          fi
-          echo "Generating release notes..."
-
-          # Generate release notes from commits
-          RELEASE_NOTES=$(
-            # Get the commit log from the last successful commit to the current commit
-            git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }} |
-
-            # Remove the commit hash at the beginning of each line
-            cut -d ' ' -f2- |
-
-            # Add a dash at the beginning of each line
-            sed 's/^/- /'
-          )
-
-          echo "Generated release notes:"
-          echo "$RELEASE_NOTES"
-
-          # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
-          echo "Saving output..."
-          delimiter="$(openssl rand -hex 8)"
-          echo "release_notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
-          echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
-          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
+        uses: ./.github/actions/generate-release-notes-action
+        with:
+          begin-sha: ${{ steps.last-successful-commit.outputs.commit_hash }}
 
       - name: Display release notes
         run: |
