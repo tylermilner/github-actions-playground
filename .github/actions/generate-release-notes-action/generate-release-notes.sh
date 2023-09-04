@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
 # Validate inputs
 if [[ -z "$INPUT_END_SHA" ]]; then
