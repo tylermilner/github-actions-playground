@@ -1,8 +1,8 @@
 #!/bin/sh -l
 
 # Validate inputs
-if [[ -z $INPUT_END_SHA ]]; then
-    echo 'Error: Unable to generate release notes. `end-sha` not available.'
+if [[ -z "$INPUT_END_SHA" ]]; then
+    echo 'Error: Unable to generate release notes. Missing `end-sha` input.'
     exit 1
 fi
 
