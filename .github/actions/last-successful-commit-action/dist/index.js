@@ -9795,7 +9795,7 @@ var __webpack_exports__ = {};
 //
 // Based on https://stackoverflow.com/a/62378683
 //
-// Don't forget to recompile after making code changes!
+// Since `node_modules` are not checked in to source control, don't forget to recompile after making code changes!
 // ncc build index.js --license licenses.txt
 //
 
