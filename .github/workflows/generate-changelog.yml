@@ -34,7 +34,7 @@ jobs:
           echo "Generating release notes..."
 
           # Generate release notes from commits
-          RELEASE_NOTES=$(git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }} | cut -d ' ' -f2-)
+          RELEASE_NOTES=$(git log --oneline --no-decorate ${{ steps.last-successful-commit.outputs.commit_hash }}..${{ github.sha }} | cut -d ' ' -f2- | sed 's/^/- /')
 
           echo "Generated release notes:"
           echo "$RELEASE_NOTES"
