@@ -1,0 +1,24 @@
+name: 'Generate Release Notes'
+description: 'Generate release notes from the commit messages between two commits'
+inputs:
+  begin-sha:
+    description: 'SHA hash for the commit that should be used as the beginning of the release notes history. Defaults to initial commit.'
+    required: false
+  end-sha:
+    description: 'SHA hash for the commit that should be used as the ending of the release notes history. Defaults to current commit.'
+    required: false
+    default: ${{ github.sha }}
+outputs:
+  release-notes:
+    description: 'The release notes generated from the commit messages between `begin-sha` and `end-sha`'
+    value: ${{ steps.generate-release-notes.outputs.release-notes }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Generate release notes
+      id: generate-release-notes
+      run: ${{ github.action_path }}/generate-release-notes.sh
+      shell: bash
+      env:
+        INPUT_BEGIN_SHA: ${{ inputs.begin-sha }}
+        INPUT_END_SHA: ${{ inputs.end-sha }}
