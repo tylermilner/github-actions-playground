@@ -20,6 +20,15 @@ The release notes generated from the commit messages between `begin-sha` and `en
 
 ## Example usage
 
+```yaml
 uses: ./.github/actions/generate-release-notes-action
 with:
   begin-sha: 'begin-sha-here'
+```
+
+## Source Code Overview
+
+The following files make up this action:
+
+* `action.yaml` - action metadata
+* `generate-release-notes.sh` - main action logic. Changes to the action's functionality should be made here.

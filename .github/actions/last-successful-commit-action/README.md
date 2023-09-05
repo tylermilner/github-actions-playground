@@ -52,7 +52,7 @@ npm install
 
 In order to avoid the need to check in the `node_modules` folder, this action utilizes [@vercel/ncc](https://github.com/vercel/ncc) to compile the action code and its dependencies into a single file that can be used for distribution.
 
-After making code changes to this action, you will need to recompile the action before committing your changes.
+⚠️ **Important!** - After making code changes to this action, you will need to recompile the action before committing your changes.
 
 1. Install `vercel/ncc` if it's not already installed:
 

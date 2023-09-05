@@ -1,7 +1,8 @@
 #!/bin/bash -l
 
-# Validate inputs
+# Validate environment variable inputs
 if [[ -z "$INPUT_END_SHA" ]]; then
+    # In theory, this should never happen since `action.yml` sets the default value of `end-sha` to the current commit
     echo 'Error: Unable to generate release notes. Missing `end-sha` input.'
     exit 1
 fi
