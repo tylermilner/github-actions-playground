@@ -9,9 +9,11 @@ fi
 
 # Generate release notes from commits
 if [[ -z "$INPUT_BEGIN_SHA" ]]; then
-    # Missing beginning commit SHA, default to full commit history
-    echo 'Missing `begin-sha` input. Generating release notes for full commit history...'
-    RELEASE_NOTES=$(git log --oneline --no-decorate)
+    # Missing beginning commit SHA, default to initial repo commit
+    INITIAL_REPO_SHA=$(git rev-list --max-parents=0 HEAD)
+
+    echo 'Missing `begin-sha` input. Generating release notes starting from initial commit '"$INITIAL_REPO_SHA"'...'
+    RELEASE_NOTES=$(git log --oneline --no-decorate $INITIAL_REPO_SHA..$INPUT_END_SHA)
 else
     # Get the commit history between begin and end SHAs
     echo "Generating release notes between $INPUT_BEGIN_SHA and $INPUT_END_SHA..."

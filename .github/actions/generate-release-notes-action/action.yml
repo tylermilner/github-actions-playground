@@ -2,7 +2,7 @@ name: 'Generate Release Notes'
 description: 'Generate release notes from the commit messages between two commits'
 inputs:
   begin-sha:
-    description: 'SHA hash for the commit that should be used as the beginning of the release notes history. Defaults to initial commit.'
+    description: 'SHA hash for the commit that should be used as the beginning of the release notes history. Defaults to initial repo commit.'
     required: false
   end-sha:
     description: 'SHA hash for the commit that should be used as the ending of the release notes history. Defaults to current commit.'
