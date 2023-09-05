@@ -10,18 +10,18 @@ const github = require('@actions/github');
 
 try {
     // Get inputs
-    const token = core.getInput("github_token");
-    const workflowId = core.getInput("workflow_id");
+    const token = core.getInput("github-token");
+    const workflowId = core.getInput("workflow-id");
     const branch = core.getInput("branch");    
     const debug = core.getInput("debug") === 'true'; // Convert input to boolean
 
     // Validate inputs
     if (!token) {
-        core.setFailed("Input 'github_token' is required.");
+        core.setFailed("Input 'github-token' is required.");
         return;
     }
     if (!workflowId) {
-        core.setFailed("Input 'workflow_id' is required.");
+        core.setFailed("Input 'workflow-id' is required.");
         return;
     }
     if (!branch) {
@@ -29,7 +29,7 @@ try {
         return;
     }
     if (debug) {
-        console.log(`Debug mode is enabled. Inputs: github_token=***, workflow_id=${workflowId}, branch=${branch}`);
+        console.log(`Debug mode is enabled. Inputs: github-token=***, workflow-id=${workflowId}, branch=${branch}`);
     }
 
     const octokit = github.getOctokit(token);
@@ -75,7 +75,7 @@ try {
             console.log("lastSuccessCommitHash:", JSON.stringify(lastSuccessCommitHash, null, 2));
         }
 
-        core.setOutput("commit_hash", lastSuccessCommitHash);
+        core.setOutput("commit-hash", lastSuccessCommitHash);
     });
 } catch (error) {
     core.setFailed(error.message);

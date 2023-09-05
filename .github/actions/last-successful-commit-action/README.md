@@ -4,11 +4,11 @@ This action returns the commit hash of the last successful run for the given wor
 
 ## Inputs
 
-### `github_token`
+### `github-token`
 
 **Required** The GitHub token (e.g. `${{ github.token }}` or `${{ secrets.GITHUB_TOKEN }}`).
 
-### `workflow_id`
+### `workflow-id`
 
 **Required** The workflow id or workflow file name (e.g `test.yml`) to determine the last sucessful run from.
 
@@ -18,7 +18,7 @@ This action returns the commit hash of the last successful run for the given wor
 
 ## Outputs
 
-### `commit_hash`
+### `commit-hash`
 
 The commit hash of the last successful run for the given workflow and branch.
 
@@ -27,8 +27,8 @@ The commit hash of the last successful run for the given workflow and branch.
 ```yaml
 uses: ./.github/actions/last-successful-commit-action
 with:
-  github_token: ${{ github.token }}
-  workflow_id: deploy_qa.yml
+  github-token: ${{ github.token }}
+  workflow-id: deploy-qa.yml
   branch: develop
 ```
 

@@ -1,10 +1,10 @@
 name: 'Last Successful Commit'
 description: 'Get the commit hash of the last successful run for the given workflow and branch'
 inputs:
-  github_token:
+  github-token:
     description: 'The GitHub token - use github.token or secrets.GITHUB_TOKEN'
     required: true
-  workflow_id:
+  workflow-id:
     description: 'The workflow id (or workflow file name) to use for determining the last successful run'
     required: true
   branch:
@@ -15,7 +15,7 @@ inputs:
     required: false
     default: false
 outputs:
-  commit_hash:
+  commit-hash:
     description: 'The commit hash for the last successful workflow run'
 runs:
   using: 'node16'
