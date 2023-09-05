@@ -7,18 +7,17 @@ if [[ -z "$INPUT_END_SHA" ]]; then
     exit 1
 fi
 
-# Generate release notes from commits
-if [[ -z "$INPUT_BEGIN_SHA" ]]; then
-    # Missing beginning commit SHA, default to initial repo commit
-    INITIAL_REPO_SHA=$(git rev-list --max-parents=0 HEAD)
+# Determine the SHA to start from
+INITIAL_SHA="$INPUT_BEGIN_SHA"
 
-    echo 'Missing `begin-sha` input. Generating release notes starting from initial commit '"$INITIAL_REPO_SHA"'...'
-    RELEASE_NOTES=$(git log --oneline --no-decorate $INITIAL_REPO_SHA..$INPUT_END_SHA)
-else
-    # Get the commit history between begin and end SHAs
-    echo "Generating release notes between $INPUT_BEGIN_SHA and $INPUT_END_SHA..."
-    RELEASE_NOTES=$(git log --oneline --no-decorate $INPUT_BEGIN_SHA..$INPUT_END_SHA)
+if [[ -z "$INPUT_BEGIN_SHA" ]]; then
+    echo 'Missing `begin-sha` input. Defaulting to initial commit.'
+    INITIAL_SHA=$(git rev-list --max-parents=0 HEAD)
 fi
+
+# Get the commit history between begin and end SHAs
+echo "Generating release notes between $INITIAL_SHA and $INPUT_END_SHA..."
+RELEASE_NOTES=$(git log --oneline --no-decorate $INITIAL_SHA..$INPUT_END_SHA)
 
 # Remove the commit hash at the beginning of each line
 RELEASE_NOTES=$(echo "$RELEASE_NOTES" | cut -d ' ' -f2-)  
@@ -30,7 +29,7 @@ echo "Generated release notes:"
 echo "$RELEASE_NOTES"
 
 # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
-echo "Saving output..."
+echo "Saving to GitHub output..."
 delimiter="$(openssl rand -hex 8)"
 echo "release-notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
 echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
