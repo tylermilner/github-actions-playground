@@ -34,4 +34,4 @@ jobs:
         run: |
           echo "Release notes:"
           # Use single quotes to prevent special characters from being interpreted
-          echo '${{ steps.generate-release-notes.outputs.release-notes}}'
+          echo '${{ steps.generate-release-notes.outputs.release-notes }}'
