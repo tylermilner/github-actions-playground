@@ -12,7 +12,7 @@ jobs:
         run: |
           git clone https://github.com/yonaskolb/Mint.git
           cd Mint
-          swift run mint install yonaskolb/mint
+          swift run mint bootstrap
 
   test:
     needs: lint
