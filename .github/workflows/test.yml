@@ -8,17 +8,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build Mint
+      - name: Install Mint
         run: |
           git clone https://github.com/yonaskolb/Mint.git
           cd Mint
-          swift run mint bootstrap
+          swift run mint install yonaskolb/mint
+      
+      - name: Run Swiftlint
+        run: |
+          mint bootstrap
+          mint run swiftlint
 
   test:
     needs: lint
     runs-on:
       - self-hosted
-      - macos-12
+      - macos-13
     steps:
       - uses: actions/checkout@v3
 
