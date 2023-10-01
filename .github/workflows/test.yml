@@ -3,7 +3,19 @@ name: Test
 on: [push, workflow_dispatch]
 
 jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Mint
+        run: |
+          git clone https://github.com/yonaskolb/Mint.git
+          cd Mint
+          swift run mint install yonaskolb/mint
+
   test:
+    needs: lint
     runs-on:
       - self-hosted
       - macos-12
