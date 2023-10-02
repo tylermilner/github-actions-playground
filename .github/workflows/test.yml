@@ -14,10 +14,16 @@ jobs:
       #     cd Mint
       #     make install
       
+      - name: Get SwiftLint version from Mintfile
+        id: get-swiftlint-version
+        run: echo "swiftlint-version=$(awk '/SwiftLint/ {split($0, a, "@"); print a[2]}' Mintfile)" >> $GITHUB_OUTPUT
+
       - name: Run Swiftlint
+        env:
+          SWIFTLINT_VERSION: ${{ steps.get-swiftlint-version.outputs.swiftlint-version }}
         run: |
-          docker pull ghcr.io/realm/swiftlint:0.53.0
-          docker run -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:0.53.0 swiftlint --strict
+          docker pull ghcr.io/realm/swiftlint:$SWIFTLINT_VERSION
+          docker run -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:$SWIFTLINT_VERSION swiftlint --strict
 
   test:
     needs: lint
