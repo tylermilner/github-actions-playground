@@ -8,17 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Mint
-        run: |
-          git clone https://github.com/yonaskolb/Mint.git
-          cd Mint
-          make install
+      # - name: Install Mint
+      #   run: |
+      #     git clone https://github.com/yonaskolb/Mint.git
+      #     cd Mint
+      #     make install
       
       - name: Run Swiftlint
         run: |
-          mint bootstrap
-          export LINUX_SOURCEKIT_LIB_PATH=/usr/lib/swift/lib
-          mint run swiftlint
+          docker pull ghcr.io/realm/swiftlint:latest
+          docker run -it -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
 
   test:
     needs: lint
