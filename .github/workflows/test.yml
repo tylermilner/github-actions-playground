@@ -11,8 +11,13 @@ jobs:
       - name: Install Mint
         run: |
           git clone https://github.com/yonaskolb/Mint.git
-          swift run Mint/mint bootstrap
-          swift run Mint/mint run swiftlint
+          cd Mint
+          make install
+      
+      - name: Run Swiftlint
+        run: |
+          mint bootstrap
+          mint run swiftlint
 
   test:
     needs: lint
