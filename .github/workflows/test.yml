@@ -17,7 +17,7 @@ jobs:
       - name: Run Swiftlint
         run: |
           docker pull ghcr.io/realm/swiftlint:latest
-          docker run -it -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
+          docker run -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
 
   test:
     needs: lint
