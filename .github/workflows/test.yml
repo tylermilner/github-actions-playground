@@ -17,6 +17,7 @@ jobs:
       - name: Run Swiftlint
         run: |
           mint bootstrap
+          export LINUX_SOURCEKIT_LIB_PATH=/usr/lib/swift/lib
           mint run swiftlint
 
   test:
