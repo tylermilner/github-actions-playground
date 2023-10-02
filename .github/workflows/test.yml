@@ -8,12 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Install Mint
-      #   run: |
-      #     git clone https://github.com/yonaskolb/Mint.git
-      #     cd Mint
-      #     make install
-      
       - name: Get SwiftLint version from Mintfile
         id: get-swiftlint-version
         run: echo "swiftlint-version=$(awk '/SwiftLint/ {split($0, a, "@"); print a[2]}' Mintfile)" >> $GITHUB_OUTPUT
