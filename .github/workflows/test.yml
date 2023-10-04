@@ -8,11 +8,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Mint
+      - name: Build Mint
         run: |
-          git clone https://github.com/yonaskolb/Mint.git
+          git clone --depth 1 --branch 0.17.5 https://github.com/yonaskolb/Mint
           cd Mint
-          swift run mint install yonaskolb/mint
+          make build
+          cd ..
+          mkdir --parents .build/release
+          mv Mint/.build/release/mint .build/release/mint
+          rm -rf Mint
+
+      - name: Install Mint
+        run: sudo cp -f .build/release/mint /usr/local/bin/mint
       
       - name: Run Swiftlint
         run: |
