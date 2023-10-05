@@ -63,5 +63,5 @@ npm i -g @vercel/ncc
 2. Compile the `index.js` file:
 
 ```Shell
-ncc build index.js --license licenses.txt
+npm run build
 ```
