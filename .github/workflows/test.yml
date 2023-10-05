@@ -21,10 +21,11 @@ jobs:
       - name: Install Mint
         run: sudo cp -f .build/release/mint /usr/local/bin/mint
       
+      - name: Install Mint packages
+        run: mint bootstrap
+
       - name: Run Swiftlint
-        run: |
-          mint bootstrap
-          mint run swiftlint --strict
+        run: mint run swiftlint --strict
         env:
           LINUX_SOURCEKIT_LIB_PATH: /usr/share/swift/usr/lib # FIXED: Fatal error: Loading libsourcekitdInProc.so failed
 
