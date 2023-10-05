@@ -25,6 +25,8 @@ jobs:
         run: |
           mint bootstrap
           mint run swiftlint --strict
+        env:
+          LINUX_SOURCEKIT_LIB_PATH: /usr/share/swift/usr/lib # FIXED: Fatal error: Loading libsourcekitdInProc.so failed
 
   test:
     needs: lint
