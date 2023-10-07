@@ -1,5 +1,7 @@
 #!/bin/bash -l
 
+# TODO: Look into adding ability to trim the release notes (see https://stackoverflow.com/q/66769953/4343618)
+
 # Validate environment variable inputs
 if [[ -z "$INPUT_END_SHA" ]]; then
     # In theory, this should never happen since `action.yml` sets the default value of `end-sha` to the current commit
@@ -27,6 +29,13 @@ RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed 's/^/- /')
 
 echo "Generated release notes:"
 echo "$RELEASE_NOTES"
+
+# Check if a filename is provided as input
+if [[ -n "$RELEASE_NOTES_FILE" ]]; then
+    # Save the release notes to the specified file
+    echo "$RELEASE_NOTES" > "$RELEASE_NOTES_FILE"
+    echo "Saved release notes to $RELEASE_NOTES_FILE"
+fi
 
 # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
 echo "Saving to GitHub output..."

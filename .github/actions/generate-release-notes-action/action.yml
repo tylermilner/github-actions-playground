@@ -8,6 +8,9 @@ inputs:
     description: 'SHA hash for the commit that should be used as the ending of the release notes history. Defaults to current commit.'
     required: false
     default: ${{ github.sha }}
+  release-notes-file:
+    description: 'File path to save release notes to.'
+    required: false
 outputs:
   release-notes:
     description: 'The release notes generated from the commit messages between `begin-sha` and `end-sha`'
@@ -22,3 +25,4 @@ runs:
       env:
         INPUT_BEGIN_SHA: ${{ inputs.begin-sha }}
         INPUT_END_SHA: ${{ inputs.end-sha }}
+        RELEASE_NOTES_FILE: ${{ inputs.release-notes-file }}

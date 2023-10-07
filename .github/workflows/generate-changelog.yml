@@ -29,9 +29,9 @@ jobs:
         uses: ./.github/actions/generate-release-notes-action
         with:
           begin-sha: ${{ steps.last-successful-commit.outputs.commit-hash }}
+          release-notes-file: release-notes.txt
 
       - name: Display release notes
         run: |
           echo "Release notes:"
-          # Use single quotes to prevent special characters from being interpreted
-          echo '${{ steps.generate-release-notes.outputs.release-notes }}'
+          cat release-notes.txt
