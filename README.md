@@ -6,7 +6,7 @@ My personal playground for testing various GitHub Actions capabilities and workf
 
 Workflow experiments and examples are available on repo branches. See below for a summary of examples or browse the branch list directly and checkout a branch that looks interesting.
 
-### Branch - `new-commits-run-check`
+### `new-commits-run-check` Branch
 
 Cron style CI setup that only runs the main job if a new commit has been pushed since the last run. Utilizes an unsophisticated approach that results in some limitations due to reliance on GitHub actions caching behavior (see below for more).
 
@@ -19,7 +19,7 @@ For context, the inspiration for this demo was to run iOS unit tests for an olde
 * Sets the `should-run` job output based on whether or not the `cache` step received a hit. If no cache hit occurred, then `should-run` is set to `true`, otherwise `should-run` is set to `false`.
 * Defines a new job that only runs if the `should-run` output from the previous job is `true`, effectively only running that job if new commits are available (or the actions cache was cleared due to the 7 day limit).
 
-### Branch - `basic-ios-ci`
+### `basic-ios-ci` Branch
 
 A basic unit testing CI setup for an iOS project:
 
@@ -38,7 +38,7 @@ A basic unit testing CI setup for an iOS project:
 * Sets up Ruby and then executes fastlane.
 * Fastlane lane runs tests only, using `scan`.
 
-### Branch - `generate-changelog` + `generate-changelog_develop`
+### `generate-changelog` + `generate-changelog_develop` Branch
 
 CI setup with custom local GitHub actions that generate a changelog based on the commit messages between the current commit and the commit of the last successful workflow run.
 
