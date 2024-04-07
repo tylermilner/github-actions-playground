@@ -15,23 +15,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Get last successful commit
-      #   id: last-successful-commit
-      #   uses: tylermilner/last-successful-commit-hash-action@v1.0.0-beta
-      #   with:
-      #     github-token: ${{ github.token }}
-      #     workflow-id: generate-changelog.yml
-      #     branch: generate-changelog_develop
-      #     debug: true
+      - name: Get last successful commit
+        id: last-successful-commit
+        uses: tylermilner/last-successful-commit-hash-action@v1.0.0-beta
+        with:
+          github-token: ${{ github.token }}
+          workflow-id: generate-changelog.yml
+          branch: generate-changelog_develop
+          debug: true
 
-      # - name: Generate release notes
-      #   id: generate-release-notes
-      #   uses: ./.github/actions/generate-release-notes-action
-      #   with:
-      #     begin-sha: ${{ steps.last-successful-commit.outputs.commit-hash }}
-      #     release-notes-file: release-notes.txt
+      - name: Generate release notes
+        id: generate-release-notes
+        uses: ./.github/actions/generate-release-notes-action
+        with:
+          begin-sha: ${{ steps.last-successful-commit.outputs.commit-hash }}
+          release-notes-file: release-notes.txt
 
-      # - name: Display release notes
-      #   run: |
-      #     echo "Release notes:"
-      #     cat release-notes.txt
+      - name: Display release notes
+        run: |
+          echo "Release notes:"
+          cat release-notes.txt
