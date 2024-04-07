@@ -38,12 +38,15 @@ A basic unit testing CI setup for an iOS project:
 * Sets up Ruby and then executes fastlane.
 * Fastlane lane runs tests only, using `scan`.
 
-### Branch - `generate-changelog` + `develop`
+### Branch - `generate-changelog` + `generate-changelog_develop`
 
 CI setup with custom local GitHub actions that generate a changelog based on the commit messages between the current commit and the commit of the last successful workflow run.
 
 **Workflow file** - `.github/workflows/generate-changelog.yml`:
 
-* Gets the commit hash for the last successful run of the `develop` branch. Utilizes a [local custom JavaScript action](.github/actions/last-successful-commit-action/README.md) to access workflow run data via the GitHub API using [Oktokit](https://www.npmjs.com/package/@actions/github).
+* Triggered on push to the `generate-changelog_develop` branch.
+* Gets the commit hash for the last successful run of the `generate-changelog_develop` branch. Utilizes my custom [last-successful-commit-hash](https://github.com/tylermilner/last-successful-commit-hash-action) action (written in JavaScript) to access workflow run data via the GitHub API using [Oktokit](https://www.npmjs.com/package/@actions/github).
 * Generates release notes based on the commit messages between the last successful run and the current commit. Utilizes a [local custom composite action](.github/actions/generate-release-notes-action/README.md) to accomplish this using a bash script.
 * Displays the generated release notes.
+
+For a version of the `generate-changelog` workflow that use local actions rather relying on actions in the GitHub Actions marketplace (i.e. my initial POC), see the `generate-changelog-local-actions` branch.
