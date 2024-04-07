@@ -49,4 +49,4 @@ CI setup with custom local GitHub actions that generate a changelog based on the
 * Generates release notes based on the commit messages between the last successful run and the current commit. Utilizes a [local custom composite action](.github/actions/generate-release-notes-action/README.md) to accomplish this using a bash script.
 * Displays the generated release notes.
 
-For a version of the `generate-changelog` workflow that use local actions rather relying on actions in the GitHub Actions marketplace (i.e. my initial POC), see the `generate-changelog-local-actions` branch.
+For a version of the `generate-changelog` workflow that use local actions rather relying on actions in the GitHub Actions marketplace, see the `generate-changelog-local-actions` branch, which contains my initial proof-of-concept implementation.
