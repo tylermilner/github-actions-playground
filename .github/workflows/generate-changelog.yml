@@ -17,7 +17,7 @@ jobs:
 
       - name: Get last successful commit
         id: last-successful-commit
-        uses: tylermilner/last-successful-commit-hash-action@v1.0.0-beta
+        uses: tylermilner/last-successful-commit-hash-action@v1
         with:
           github-token: ${{ github.token }}
           workflow-id: generate-changelog.yml
