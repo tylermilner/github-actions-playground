@@ -3,6 +3,7 @@ name: Generate Changelog
 on:
   push:
     branches: [generate-changelog_develop]
+  workflow_dispatch:
 
 jobs:
   generate-changelog:
